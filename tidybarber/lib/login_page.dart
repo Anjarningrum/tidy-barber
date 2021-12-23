@@ -47,7 +47,6 @@ class _LoginPageState extends State<LoginPage> {
       localStorage.setString('name', body['name']);
       localStorage.setString('email', body['email']);
       localStorage.setString('alamat', body['alamat']);
-      localStorage.setString('photo', body['photo']);
       Navigator.push(
           context, new MaterialPageRoute(builder: (context) => Welcome()));
     } else {

@@ -29,6 +29,7 @@ class Barber extends StatelessWidget {
         '/main': (context) => Main(),
         '/artikel': (context) => Artikel(),
         '/pesan': (context) => Pesan(),
+        '/profil': (context) => Profile(),
       },
     );
   }

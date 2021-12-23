@@ -55,13 +55,20 @@ class _BerandaState extends State<Beranda> {
                         Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(30, 20, 0, 20),
-                              child: Image.asset(
-                                'assets/logo.png',
-                                width: 70,
-                                height: 70,
-                              ),
-                            ),
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 20, 0, 20),
+                                child: Container(
+                                  height: 60,
+                                  width: 60,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/imagebarber/${snapshot.data['name']}.jpeg'),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                )),
                             Column(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -157,7 +164,15 @@ class _BerandaState extends State<Beranda> {
                                           padding: EdgeInsets.zero,
                                           alignment: Alignment.topCenter),
                                       child: Row(children: <Widget>[
-                                        Text("Lihat Semua"),
+                                        GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  new MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Artikel()));
+                                            },
+                                            child: Text("Lihat Semua")),
                                       ]),
                                     )
                                   ],
@@ -257,57 +272,65 @@ class _BerandaState extends State<Beranda> {
                           future: _previewUlasan(),
                           builder:
                               (BuildContext context, AsyncSnapshot snapshot) {
-                            return Container(
-                                child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 1,
-                              itemBuilder: (context, index) {
-                                return Card(
-                                  shadowColor: Colors.amber,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        10), // if you need this
-                                    side: BorderSide(
-                                      color: Colors.grey.withOpacity(0.2),
-                                      width: 1,
+                            if (snapshot.hasData) {
+                              return Container(
+                                  child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 1,
+                                itemBuilder: (context, index) {
+                                  return Card(
+                                    shadowColor: Colors.amber,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          10), // if you need this
+                                      side: BorderSide(
+                                        color: Colors.grey.withOpacity(0.2),
+                                        width: 1,
+                                      ),
                                     ),
-                                  ),
-                                  margin: EdgeInsets.all(4),
-                                  child: Container(
-                                    padding: EdgeInsets.all(8.0),
-                                    height: 60.0,
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Padding(
-                                                padding: EdgeInsets.all(0),
-                                                child: Text(
-                                                    "Rating : ${snapshot.data['rating']}")),
-                                            SizedBox(
-                                              width: 35,
-                                            ),
-                                            Padding(
-                                                padding: EdgeInsets.all(0),
-                                                child: Text(
-                                                  "Customer : ${snapshot.data['customer']}",
-                                                )),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.all(0),
-                                          child: Text(snapshot.data['komentar'],
-                                              textAlign: TextAlign.start),
-                                        )
-                                      ],
+                                    margin: EdgeInsets.all(4),
+                                    child: Container(
+                                      padding: EdgeInsets.all(8.0),
+                                      height: 60.0,
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                  padding: EdgeInsets.all(0),
+                                                  child: Text((() {
+                                                    if (snapshot.data != null) {
+                                                      return "Rating : ${snapshot.data['rating']}";
+                                                    } else {
+                                                      return "Rating : ";
+                                                    }
+                                                  })())),
+                                              SizedBox(
+                                                width: 35,
+                                              ),
+                                              Padding(
+                                                  padding: EdgeInsets.all(0),
+                                                  child: Text((() {
+                                                    if (snapshot.data != null) {
+                                                      return "Customer : ${snapshot.data['customer']}";
+                                                    } else {
+                                                      return "Customer : ";
+                                                    }
+                                                  })())),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                            ));
+                                  );
+                                },
+                              ));
+                            } else {
+                              return Center();
+                            }
                           }),
                     ),
                   ],

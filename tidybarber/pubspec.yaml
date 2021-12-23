@@ -69,6 +69,12 @@ flutter:
      - assets/imageberanda/pendapatan.png
      - assets/imageberanda/pesan.png
      - assets/imageberanda/riwayatorder.png
+     - assets/imagebarber/achmad asrori.jpeg
+     - assets/imagebarber/anjar septia.jpeg
+     - assets/imagebarber/nungki magfiroh.jpeg
+     - assets/imagebarber/rizky rafi.jpeg
+     - assets/imagebarber/risma novianti.jpeg
+     - assets/imagebarber/zidan nurdin.jpeg
      - assets/cover.png
   fonts:
       - family: Gilory
